@@ -1,0 +1,16 @@
+.unfinishedDeal{
+    background-color: yellow;
+    cursor: pointer;
+}
+.finishedDeal{
+    background-color: green;
+    cursor: pointer;
+}
+.dealListBlock{
+    width: 200px;
+}
+.deleteDeal{
+    float: right;
+    margin-right: 10px;
+    
+}
