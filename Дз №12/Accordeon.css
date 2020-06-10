@@ -1,0 +1,12 @@
+.title{
+    border: 2px solid crimson;
+    background-color: rgb(192, 192, 192);
+}
+.body{
+    border: 1px solid green;
+    background-color: rgb(146, 193, 199);
+    display: none;
+}
+.visible-class{
+    display: block;
+}
