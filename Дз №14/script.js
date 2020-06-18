@@ -7,9 +7,9 @@ const dealListEl = document.getElementById('dealList');
 const dealTemplate = document.getElementById('dealTemplate').innerHTML;
 
 
-createDelaArr();
+fillInDealList();
 
-function createDelaArr(){
+function fillInDealList(){
     dealArr = fetch('https://jsonplaceholder.typicode.com/todos').then((res) => { 
         return res.json();
     }).then((data) => {
@@ -20,12 +20,15 @@ function createDelaArr(){
     });
 }
 function addDealToList(deal, status){
-    if(status){
-        deal =  changeDealKeys( deal, STATUS_KEY, FINISHED_DEAL);
-    }else{
-        deal = changeDealKeys(deal, STATUS_KEY, UNFINISHED_DEAL);
-    }
+    deal = addRightClass(deal, status);
     dealListEl.innerHTML += deal;
+}
+function addRightClass(deal, status){
+    if(status){
+        return changeDealKeys( deal, STATUS_KEY, FINISHED_DEAL);
+    }else{
+        return changeDealKeys(deal, STATUS_KEY, UNFINISHED_DEAL);
+    }
 }
 function changeDealKeys(deal,key, value){
     return deal.replace(key, value);
