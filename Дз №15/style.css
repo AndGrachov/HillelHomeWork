@@ -1,0 +1,25 @@
+.albums{
+    width: 70%;
+    border: 2px solid crimson;
+    float: left;
+
+}
+.titlesBlock{
+    float: left;
+    width: 35%;
+    border-right: 1px solid green;
+}
+.photosBlock{
+    float: left;
+    width: 60%;
+    margin: 3px;
+}
+.title{
+    border: 1px solid red;
+    cursor: pointer;
+    margin: 3px;
+}
+.photo{
+    width: 94px;
+    height: 94px;
+}

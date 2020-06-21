@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css" />
+    <script src="script.js" async></script>
+</head>
+<body>
+    <div class="albums">
+        <div id="titlesBlock" class="titlesBlock">
+            <div class="titlesList" id="titlesList">
+
+            </div>
+            
+            
+        </div>
+        <div id="photosBlock" class="photosBlock">
+            
+        </div>
+    </div>
+    <script type="text/template" id="photoTemplate" >
+        <img class = "photo" src="{{url}}" alt ="{{title}}">
+    </script>
+    <script type="text/template" id="titleTemplate"  >
+        <div data-id="{{id}}" class = "title">{{title}}</div>
+    </script>
+</body>
+</html>
