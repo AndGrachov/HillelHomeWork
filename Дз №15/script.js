@@ -5,18 +5,12 @@ const ID_ATTRIBUTE = 'id';
 const URL_ATTRIBUTE = 'url';
 
 
-const titleTemplateEl = document.getElementById('titleTemplate').innerHTML;
+const titleTemplate = document.getElementById('titleTemplate').innerHTML;
 const titlesListEl = document.getElementById('titlesList');
-const photoTemplateEl = document.getElementById('photoTemplate').innerHTML;
+const photoTemplate = document.getElementById('photoTemplate').innerHTML;
 const photosBlock = document.getElementById('photosBlock');
 
 createTitlesList();
-const timerId = setInterval(() => {
-    if(titlesListEl.firstElementChild){
-        createPhotosList(titlesListEl.firstElementChild.dataset.id)
-        clearInterval(timerId);
-    }
-}, 1000);
 
 
 titlesListEl.addEventListener('click', (e) =>{
@@ -27,17 +21,20 @@ titlesListEl.addEventListener('click', (e) =>{
 function createTitlesList(){
      fetch(TITLES_URL)
     .then((res) => res.json())
-    .then((data) =>createList(data,titlesListEl,titleTemplateEl,TITLE_ATTRIBUTE,ID_ATTRIBUTE ));
+    .then((data) =>{
+        createList(data,titlesListEl,titleTemplate,TITLE_ATTRIBUTE,ID_ATTRIBUTE );
+        createPhotosList(titlesListEl.firstElementChild.dataset.id);
+    });
 }
 function createPhotosList(albumId){
     fetch(PHOTOS_URL + albumId)
     .then((res) => res.json())
-    .then((data) =>createList(data,photosBlock,photoTemplateEl,TITLE_ATTRIBUTE,URL_ATTRIBUTE));
+    .then((data) =>createList(data,photosBlock,photoTemplate,TITLE_ATTRIBUTE,URL_ATTRIBUTE));
 }
-function createList(data, listEl, templateEl, firstAttribute, secondAttribute){
+function createList(data, listEl, templateEl, titleAttribute, additionalAttribute){
     data.forEach(element => {
         listEl.innerHTML += templateEl
-        .replace(`{{${firstAttribute}}}`, element[firstAttribute])
-        .replace(`{{${secondAttribute}}}`, element[secondAttribute]);
+        .replace(`{{${titleAttribute}}}`, element[titleAttribute])
+        .replace(`{{${additionalAttribute}}}`, element[additionalAttribute]);
     });
 }
