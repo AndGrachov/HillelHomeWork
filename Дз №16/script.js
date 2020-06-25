@@ -13,6 +13,7 @@ const dealTemplate = document.getElementById('dealTemplate').innerHTML;
 const inputField = document.getElementById('inputField');
 const addButton = document.getElementById('addButton');
 let dealsList = [];
+let dealToAdd ={};
 
 
 fillInDealList();
@@ -21,14 +22,17 @@ addButton.addEventListener('click',onAddButtonClick);
 
 
 function fillInDealList(){
-    dealArr = fetch(TODOLIST_URL)
+     fetch(TODOLIST_URL)
     .then((res) =>  res.json())
     .then(createToDoList);
 }
 function createToDoList(deals){
     dealsList = deals;
     dealsList.forEach((el) =>{
-        addDealToList (changeDealKeys(dealTemplate, VALUE_KEY, el['title']), el['completed'], el['id']); 
+        dealToAdd['body'] = changeDealKeys(dealTemplate, VALUE_KEY, el['title']);
+        dealToAdd['status'] = el['completed'];
+        dealToAdd['id'] = el['id'];
+        addDealToList(dealToAdd); 
         
     });
 }
@@ -38,15 +42,15 @@ function onDealListElClick(e){
         deleteDeal(element.parentNode);
         deleteDealOnServer(element.parentNode.dataset.id);
     }else if(element.classList.contains(DEAL_CLASS)){
-        changeStatusOfDeal();
+        changeStatusOfDeal(element);
     };
 }
-function changeStatusOfDeal(){
+function changeStatusOfDeal(element){
     changeStatus(element);
     if(element.classList.contains(FINISHED_DEAL)){
-        changeStatusOnServer(element.dataset.id, dealsList[element.dataset.id]['title'],true)
+        changeStatusOnServer(element.dataset.id, dealsList[element.dataset.id - 1]['title'],true)
     }else{
-        changeStatusOnServer(element.dataset.id, dealsList[element.dataset.id]['title'],false)
+        changeStatusOnServer(element.dataset.id, dealsList[element.dataset.id - 1]['title'],false)
     }
 }
 function deleteDealOnServer(dealId){
@@ -72,7 +76,6 @@ function changeStatusOnServer(dealId, titleValue ,status){
     .then((data) => console.log(data));
 }
 function onAddButtonClick(){
-    addDealToList (changeDealKeys(dealTemplate, VALUE_KEY, inputField.value), false, (dealsList[dealsList.length - 1]['id']) + 1);
     sendNewProperty(inputField.value);
     inputField.value = '';
 }
@@ -88,7 +91,15 @@ function sendNewProperty(titleValue){
         }),
     })
     .then((res) => res.json())
-    .then((data) => console.log(data));
+    .then((data) => {
+        console.log(data);
+        dealToAdd['body'] = changeDealKeys(dealTemplate, VALUE_KEY, data['title']);
+        dealToAdd['status'] = data['completed'];
+        dealToAdd['id'] = data['id'];
+        dealsList.push(dealToAdd);
+        addDealToList(dealToAdd);
+    })
+    ;
 
 }
 function deleteDeal(deal){
@@ -96,19 +107,18 @@ function deleteDeal(deal){
     deal.remove();
 }
 function changeStatus(deal){
-        deal.classList.toggle(UNFINISHED_DEAL);
-        deal.classList.toggle(FINISHED_DEAL);
+            deal.classList.toggle(FINISHED_DEAL);
 }
-function addDealToList(deal, status, dealId){
-    deal = changeDealKeys(deal,ID_KEY, dealId)
-    deal = addRightClass(deal, status);
-    dealListEl.innerHTML += deal;
+function addDealToList(deal){
+    deal['body'] = changeDealKeys(deal['body'],ID_KEY, deal['id'])
+    deal['body'] = addRightClass(deal['body'], deal['status']);
+    dealListEl.innerHTML += deal['body'];
 }
 function addRightClass(deal, status){
     if(status){
         return changeDealKeys( deal, STATUS_KEY, FINISHED_DEAL);
     }else{
-        return changeDealKeys(deal, STATUS_KEY, UNFINISHED_DEAL);
+        return changeDealKeys(deal, STATUS_KEY, '');
     }
 }
 function changeDealKeys(deal,key, value){
