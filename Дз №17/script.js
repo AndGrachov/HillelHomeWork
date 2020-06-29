@@ -3,13 +3,12 @@ const DELETE_STICKER_CLASS = 'deleteSticker';
 const STICKER_BODY_CLASS = 'stickerBody';
 const STICKER_CLASS = '.sticker';
 
-const inputStickerBody = document.getElementById('inputStickerBody');
-const inputStickerTitle = document.getElementById('inputStickerTitle');
-const createStickerBtnEl = document.getElementById('createStickerBtn');
+const inputStickerBodyEl = document.getElementById('inputStickerBody');
+const createStickerBtn = document.getElementById('createStickerBtn');
 const stickerListBlockEl = document.getElementById('stickerListBlock');
 const stickerTemplate = document.getElementById('stickerTemplate').innerHTML;
 
-createStickerBtnEl.addEventListener('click',oncreateStickerBtnElClick);
+createStickerBtn.addEventListener('click',oncreateStickerBtnElClick);
 stickerListBlockEl.addEventListener('click',onstickerListBlockElClick);
 stickerListBlockEl.addEventListener('blur',onstickerListBlockElBlure, true);
 
@@ -36,11 +35,10 @@ function renderStickersList(data){
 function changeTemplate(data){
     return stickerTemplate
     .replace('{{id}}' ,data.id)
-    .replace('{{body}}' ,data.value)
-    .replace('{{title}}' ,data.description);
+    .replace('{{body}}' ,data.description);
 }
 function oncreateStickerBtnElClick(){
-    const sticker = {description: inputStickerTitle.value, value: inputStickerBody.value}
+    const sticker = {description: inputStickerBodyEl.value}
     fetch(URL, {
         method: 'POST',
         headers: {
@@ -75,7 +73,7 @@ function onstickerListBlockElBlure(e){
 }
 function changeStickerDescription(id, newValue){
     let sticker = stickers.find((sticker) => sticker.id === id);
-    sticker.value = newValue;
+    sticker.description = newValue;
     fetch(`${URL}/${id}`,{
         method:'PUT',
         headers: {

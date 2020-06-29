@@ -1,6 +1,5 @@
 .sticker{
     border: 1px solid grey;
-    width: 40%;
     float: left;
     margin: 2px;
     padding: 2px;
@@ -17,8 +16,4 @@
 .deleteSticker{
     float: right;
     cursor: pointer;
-}
-.stickerTitle{
-    float: left;
-
 }

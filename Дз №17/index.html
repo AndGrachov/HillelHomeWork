@@ -9,7 +9,6 @@
 </head>
 <body>
     <div>
-        <p>Введите название заметки: <input type="text" id="inputStickerTitle"></p>
         <p>Введите содержание заметки: <input type="text" id="inputStickerBody"></p>
         <button id="createStickerBtn">Создать</button>
     </div>
@@ -18,7 +17,6 @@
     <script type="text/template" id="stickerTemplate" >
         <div data-id = "{{id}}" class="sticker ">
             <div class = 'stickerHead'>
-                <div class  = "stickerTitle">{{title}}</div>
                 <span class = "deleteSticker">x</span>
             </div>
             <textarea class="stickerBody" cols="30" rows="10">{{body}}</textarea>
