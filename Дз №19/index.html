@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="JqueryStyles/base/jquery-ui.css">
+    <link rel="stylesheet" href="style.css" />
+    <script src="https://code.jquery.com/jquery-1.12.4.js" defer></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js" defer></script>
+    <script src="script.js" defer></script>
+</head>
+<body>
+    <div id="dialog-form" title="Create new user">
+        <p class="validateTips">All form fields are required.</p>
+        <form id="contactForm">
+          <fieldset>
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" value="" class="text ui-widget-content ui-corner-all">
+            <label for="surname">Surname</label>
+            <input type="text" name="surname" id="surname" value="" class="text ui-widget-content ui-corner-all">
+            <label for="phone">Phone</label>
+            <input type="text" name="phone" id="phone" value="" class="text ui-widget-content ui-corner-all">
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email" value="" class="text ui-widget-content ui-corner-all">
+       
+            <input type="submit" tabindex="-1" style="position:absolute; top:-1000px">
+          </fieldset>
+        </form>
+      </div>
+    <div id="contactList" class="contactList">
+        <div class="header">
+            <div class="contactListProperties"><h1>Name</h1></div>
+            <div class="contactListProperties"><h1>Surname</h1></div>
+            <div class="contactListProperties"><h1>Phone</h1></div>
+            <div class="contactListProperties"><h1>Email</h1></div>
+        </div>
+        <div id="contactListFooter" class="footer">
+        </div>
+    </div>
+    <button id="addContact">Add contanct</button>
+    <script type="text/template" id="contactTemplate" >
+        <div data-id = "{{id}}" class="contact">
+            <div class = "contactPart">{{name}}</div>
+            <div class = "contactPart">{{surname}}</div>
+            <div class = "contactPart">{{phone}}</div>
+            <div class = "contactPart">{{email}}</div>
+            <span class = "deleteContact">x</span>
+        </div>
+    </script>
+</body>
+</html>

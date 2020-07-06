@@ -1,0 +1,30 @@
+.contactList{
+    border: 2px solid crimson;
+    width: 70%;
+    float: left;
+    margin-right: 10px;
+}
+.contactPart{
+    float: left;
+    border: 1px solid green;
+    width: 23%;
+    text-align: center;
+    height: 20px;
+    overflow: auto;
+}
+.contactListProperties{
+    float: left;
+    border: 1px solid green;
+    width: 23%;
+    text-align: center;
+}
+.deleteContact{
+    float: right;
+    cursor: pointer;
+}
+.contactForm{
+    width: 70%;
+}
+.deleteContact{
+    margin-right: 10px;
+}
