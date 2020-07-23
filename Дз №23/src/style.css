@@ -1,0 +1,16 @@
+.unfinishedDeal{
+    background-color: yellow;
+}
+.finishedDeal{
+    background-color: green;
+}
+.deal{
+    cursor: pointer;
+    border: 1px solid crimson;
+    padding: 3px;
+    margin: 2px;
+    width: 50%;
+}
+.deleteDeal{
+    float: right;
+}
