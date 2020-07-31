@@ -8,7 +8,7 @@ export default class Controller{
     constructor(){
         this.dealsCollection = new Collection(URL);
         this.dealsCollection.getToDos()
-        .then(()=> this.listView.renderToDoList(this.dealsCollection.toDoList));
+        .then(()=> this.render());
 
         this.listView = new List({
             onDelete: this.onDelete.bind(this),
@@ -18,14 +18,17 @@ export default class Controller{
     }
     addDeal(value){
         this.dealsCollection.addNewDeal(value)
-        .then(() => this.listView.renderToDoList(this.dealsCollection.toDoList));
+        .then(() => this.render());
     }
     onChange(id){
         this.dealsCollection.chandeDeal(id)
-        .then(() => this.listView.renderToDoList(this.dealsCollection.toDoList));
+        .then(() => this.render());
     }
     onDelete(id){
         this.dealsCollection.deleteDeal(id)
-        .then(() => this.listView.renderToDoList(this.dealsCollection.toDoList));
+        .then(() => this.render());
+    }
+    render(){
+        this.listView.renderToDoList(this.dealsCollection.toDoList);
     }
 }

@@ -3,7 +3,7 @@ const FINISHED_DEAL = 'finishedDeal';
 export default class List{
     constructor(config){
         this.config = config;
-        this.$dealTemplate = $('#dealTemplate').text();
+        this.dealTemplate = $('#dealTemplate').text();
         this.$inputFieldEl = $('#inputField');
         this.$dealListEl = $('#dealList');
 
@@ -16,7 +16,7 @@ export default class List{
         this.$dealListEl.html(deals.map(this.changeDealKeys.bind(this)).join(''))
     }
     changeDealKeys(deal){
-        return this.$dealTemplate
+        return this.dealTemplate
             .replace('{{id}}', deal.id)
             .replace('{{status}}', this.getRightClass(deal.isDone))
             .replace('{{value}}', deal.title);

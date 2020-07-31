@@ -4,7 +4,7 @@ class Controller{
     constructor(){
         this.dealsCollection = new Collection(URL);
         this.dealsCollection.getToDos()
-        .then(()=> render());
+        .then(()=> this.render());
 
         this.listView = new List({
             onDelete: this.onDelete.bind(this),
@@ -14,15 +14,15 @@ class Controller{
     }
     addDeal(value){
         this.dealsCollection.addNewDeal(value)
-        .then(() => render());
+        .then(() => this.render());
     }
     onChange(id){
         this.dealsCollection.chandeDeal(id)
-        .then(() => render());
+        .then(() => this.render());
     }
     onDelete(id){
         this.dealsCollection.deleteDeal(id)
-        .then(() => render());
+        .then(() => this.render());
     }
     render(){
         this.listView.renderToDoList(this.dealsCollection.toDoList);
