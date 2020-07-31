@@ -1,10 +1,14 @@
-const URL = 'https://5dd3d5ba8b5e080014dc4bfa.mockapi.io/todos';
 
-class Controller{
+const URL = 'https://5dd3d5ba8b5e080014dc4bfa.mockapi.io/todos';
+import List from '../view/List'
+import Collection from '../model/Collection.js'
+
+
+export default class Controller{
     constructor(){
         this.dealsCollection = new Collection(URL);
         this.dealsCollection.getToDos()
-        .then(()=> render());
+        .then(()=> this.listView.renderToDoList(this.dealsCollection.toDoList));
 
         this.listView = new List({
             onDelete: this.onDelete.bind(this),
@@ -14,17 +18,14 @@ class Controller{
     }
     addDeal(value){
         this.dealsCollection.addNewDeal(value)
-        .then(() => render());
+        .then(() => this.listView.renderToDoList(this.dealsCollection.toDoList));
     }
     onChange(id){
         this.dealsCollection.chandeDeal(id)
-        .then(() => render());
+        .then(() => this.listView.renderToDoList(this.dealsCollection.toDoList));
     }
     onDelete(id){
         this.dealsCollection.deleteDeal(id)
-        .then(() => render());
-    }
-    render(){
-        this.listView.renderToDoList(this.dealsCollection.toDoList);
+        .then(() => this.listView.renderToDoList(this.dealsCollection.toDoList));
     }
 }
