@@ -1,0 +1,19 @@
+.chat{
+    position: absolute;
+    left: 40%;
+    top: 10%;
+    border: 2px solid green;
+    width: 400px;
+    height: 600px;
+}
+.messages{
+    height: 80%;
+    border-bottom: 1px solid crimson;
+    overflow: auto;
+}
+.createMassage{
+    padding: 5px;
+}
+.message{
+    border: 1px solid black;
+}
